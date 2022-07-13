@@ -19,17 +19,18 @@ Route::middleware('auth:eloquent')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('/products','App\Http\Controllers\productsController@index');
-Route::post('/products','App\Http\Controllers\productsController@store');
-Route::put('/products/{id}','App\Http\Controllers\productsController@update');
-Route::delete('/products/{id}','App\Http\Controllers\productsController@destroy');
+//Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('/products','App\Http\Controllers\productsController@index');
+    Route::post('/products','App\Http\Controllers\productsController@store');
+    Route::put('/products/{id}','App\Http\Controllers\productsController@update');
+    Route::delete('/products/{id}','App\Http\Controllers\productsController@destroy');
+//});
 
 Route::group([
-//
+
     'middleware' => 'api',
     'prefix' => 'auth',
-//
+
 ], function ($router) {
 
     Route::post('/login', 'App\Http\Controllers\AuthController@login');  // 'App\Http\Controllers\AuthController@login');
